@@ -1,13 +1,21 @@
 'use strict';
+const memo = new Map();
+//決まっているものなので最初からいれておく
+memo.set(0, 0);
+memo.set(1, 1);
+
 function fib(n){
-  if(n===0){
-    return 0;
-  }else if(n===1){
-    return 1;
+  //データがあればそれをつかう
+  if(memo.has(n)){
+    return memo.get(n);
+  } else {
+  //データがなければ計算する
+    let value = fib(n-1) + fib(n-2);
+    memo.set(n,value);
+    return value;
   }
-  return fib(n-1) + fib(n-2);
   
 }
-for (let i = 0; i <= 40; i++){
+for (let i = 0; i <= 1000; i++){
   console.log(i + "フィボナッチ数は" + fib(i) + "です。");
 }
